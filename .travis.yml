@@ -1,0 +1,31 @@
+# vim ft=yaml
+sudo: false  # To use travis container infrastructure
+language: python
+python:
+    - 2.7
+    - 3.4
+    - 3.5
+
+env:
+    - BLAS=atlas
+    - BLAS=openblas
+
+before_install:
+    - source tools/travis_tools.sh
+    - virtualenv --python=python venv
+    - source venv/bin/activate
+    - python --version # just to check
+    - python -m pip install -U pip
+    - pip install -U wheel
+
+install:
+    - pip install --timeout=60 -r $BLAS-requirements.txt
+
+script:
+    - pip install nose
+    # Change into an innocuous directory and find tests from installation
+    - mkdir for_testing
+    - cd for_testing
+    - python -c 'import numpy; numpy.test()'
+    - python -c 'import scipy; scipy.test()'
+    - nosetests sklearn
