@@ -1,0 +1,7 @@
+--no-index
+numpy
+scipy
+numexpr
+scikit-learn
+statsmodels
+pandas
