@@ -9,16 +9,13 @@ python:
 env:
     - BLAS=atlas
     - BLAS=atlascustom
+    - BLAS=openblas CORE=
     - BLAS=openblas CORE=prescott
     - BLAS=openblas CORE=dunnington
     - BLAS=openblas CORE=penryn
     - BLAS=openblas CORE=core2
     - BLAS=openblas CORE=nehalem
     - BLAS=openblas CORE=sandybridge
-    - BLAS=openblas CORE=haswell
-    - BLAS=openblas CORE=bulldozer
-    - BLAS=openblas CORE=piledriver
-    - BLAS=openblas CORE=steamroller
 
 before_install:
     - virtualenv --python=python venv
