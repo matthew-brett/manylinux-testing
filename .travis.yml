@@ -28,6 +28,7 @@ before_install:
 install:
     - pip install --timeout=60 -r $BLAS-requirements.txt
     # Statsmodels latest release breaks with latest pandas; use current trunk
+    - pip install -f https://nipy.bic.berkeley.edu/manylinux cython==0.23.4
     - pip install -U --pre git+https://github.com/statsmodels/statsmodels@eed4ae5a90a1d1ac312c24bbebf2bff88fe87da9
 
 script:
