@@ -8,7 +8,15 @@ python:
 
 env:
     - BLAS=atlas
-    - BLAS=openblas
+    - BLAS=atlascustom
+    - BLAS=openblas CORE=prescott
+    - BLAS=openblas CORE=core2
+    - BLAS=openblas CORE=nehalem
+    - BLAS=openblas CORE=sandybridge
+    - BLAS=openblas CORE=haswell
+    - BLAS=openblas CORE=bulldozer
+    - BLAS=openblas CORE=piledriver
+    - BLAS=openblas CORE=steamroller
 
 before_install:
     - virtualenv --python=python venv
@@ -19,12 +27,20 @@ before_install:
 
 install:
     - pip install --timeout=60 -r $BLAS-requirements.txt
+    # Statsmodels latest release breaks with latest pandas; use current trunk
+    - pip install -U --pre git+https://github.com/statsmodels/statsmodels@eed4ae5a90a1d1ac312c24bbebf2bff88fe87da9
 
 script:
+    - if [ "$BLAS" == "openblas" ]; then
+          PREFIX="OPENBLAS_VERBOSE=2 OPENBLAS_CORETYPE=$CORE";
+      fi
     - pip install nose
     # Change into an innocuous directory and find tests from installation
     - mkdir for_testing
     - cd for_testing
-    - python -c 'import numpy; numpy.test()'
-    - python -c 'import scipy; scipy.test()'
-    - nosetests sklearn
+    - $PREFIX python -c 'import numpy; numpy.test("full")'
+    - $PREFIX python -c 'import scipy; scipy.test("full")'
+    - $PREFIX python -c 'import statsmodels; statsmodels.test("full")'
+    - $PREFIX nosetests sklearn
+    - $PREFIX nosetests numexpr
+    - $PREFIX nosetests --exe -A "not slow and not network and not disabled" -e test_parsers -e TestDatetimeParsingWrappers pandas
