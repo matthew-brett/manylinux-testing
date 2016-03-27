@@ -33,17 +33,14 @@ install:
     - pip install -U --pre git+https://github.com/statsmodels/statsmodels@eed4ae5a90a1d1ac312c24bbebf2bff88fe87da9
 
 script:
-    - if [ "$BLAS" == "openblas" ]; then PREFIX="OPENBLAS_VERBOSE=2 OPENBLAS_CORETYPE=$CORE"; fi
-    - echo $PREFIX
-    - PYTHON="$PREFIX python"
-    - NOSETESTS="$PREFIX nosetests"
+    - if [ "$BLAS" == "openblas" ]; then export OPENBLAS_VERBOSE=2; export OPENBLAS_CORETYPE=$CORE; fi
     - pip install nose
     # Change into an innocuous directory and find tests from installation
     - mkdir for_testing
     - cd for_testing
-    - $PYTHON -c 'import numpy; numpy.test("full")'
-    - $PYTHON -c 'import scipy; scipy.test("full")'
-    - $PYTHON -c 'import statsmodels; statsmodels.test("full")'
-    - $NOSETESTS sklearn
-    - $NOSETESTS numexpr
-    - $NOSETESTS --exe -A "not slow and not network and not disabled" -e test_parsers -e TestDatetimeParsingWrappers pandas
+    - python -c 'import numpy; numpy.test("full")'
+    - python -c 'import scipy; scipy.test("full")'
+    - python -c 'import statsmodels; statsmodels.test("full")'
+    - nosetests sklearn
+    - nosetests numexpr
+    - nosetests --exe -A "not slow and not network and not disabled" -e test_parsers -e TestDatetimeParsingWrappers pandas
