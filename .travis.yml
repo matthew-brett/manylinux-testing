@@ -38,7 +38,7 @@ script:
     - cd for_testing
     - python -c 'import numpy; numpy.test("full")'
     - python -c 'import scipy; scipy.test("full")'
-    - python -c 'import statsmodels; statsmodels.test()'
     - nosetests sklearn
     - nosetests numexpr
     - nosetests --exe -A "not slow and not network and not disabled" -e test_parsers -e TestDatetimeParsingWrappers pandas
+    - python -c 'import statsmodels; statsmodels.test(verbose=3)'
