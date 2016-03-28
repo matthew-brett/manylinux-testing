@@ -1,6 +1,10 @@
 # vim ft=yaml
 sudo: false  # To use travis container infrastructure
 language: python
+addons:
+  apt:
+    packages:
+      - gfortran
 python:
     - 2.7
     - 3.4
