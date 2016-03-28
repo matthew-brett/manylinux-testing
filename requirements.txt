@@ -5,4 +5,3 @@ numexpr
 scikit-learn
 statsmodels
 pandas
-cython
