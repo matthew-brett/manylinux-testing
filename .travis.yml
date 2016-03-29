@@ -26,9 +26,10 @@ before_install:
 
 install:
     - pip install --timeout=60 -r $BLAS-requirements.txt
-    # Statsmodels latest release breaks with latest pandas; use current trunk
+    # Statsmodels latest release breaks with latest pandas; use recent trunk
+    # commit
     - pip install cython
-    - pip install -U --pre git+https://github.com/statsmodels/statsmodels@eed4ae5a90a1d1ac312c24bbebf2bff88fe87da9
+    - pip install https://github.com/statsmodels/statsmodels/archive/eed4ae5a90a1d1ac312c24bbebf2bff88fe87da9.zip
 
 script:
     - export OPENBLAS_VERBOSE=2
@@ -42,4 +43,4 @@ script:
     - nosetests sklearn
     - nosetests numexpr
     - nosetests --exe -A "not slow and not network and not disabled" -e test_parsers -e TestDatetimeParsingWrappers pandas
-    - python -c 'import statsmodels; statsmodels.test(verbose=3)'
+    - nosetests -e test_vcomp_2 --verbosity=3 statsmodels
