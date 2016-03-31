@@ -1,3 +1,4 @@
 # Get dependencies from ATLAS builds on rackspace
--f https://552f3b3c2d06e4c8080d-f73b241aa77a5851fd7c16ebcb53c33c.ssl.cf2.rackcdn.com
+--trusted-host f0a8b7f2b7d90646e9cd-f73b241aa77a5851fd7c16ebcb53c33c.r16.cf2.rackcdn.com
+-f http://f0a8b7f2b7d90646e9cd-f73b241aa77a5851fd7c16ebcb53c33c.r16.cf2.rackcdn.com
 -r requirements.txt
