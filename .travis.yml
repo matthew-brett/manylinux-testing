@@ -7,8 +7,6 @@ python:
     - 3.5
 
 env:
-    - BLAS=atlas
-    - BLAS=atlascustom
     - BLAS=openblas
     - BLAS=openblas CORE=prescott
     - BLAS=openblas CORE=dunnington
