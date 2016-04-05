@@ -46,5 +46,5 @@ script:
       -e test_parsers -e TestDatetimeParsingWrappers
       -e test_range_slice_seconds -e test_range_slice_day
       pandas
-    # Exclude extremely slow statsmodels test
-    - nosetests -e test_vcomp_2 --verbosity=3 statsmodels
+    # Exclude extremely slow statsmodels tests
+    - nosetests -e test_vcomp_2 -e test_sarimax --verbosity=3 statsmodels
