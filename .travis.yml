@@ -1,9 +1,6 @@
 # vim ft=yaml
 sudo: false  # To use travis container infrastructure
 language: python
-env:
-    global:
-        - BLAS=openblas
 
 python:
     - 2.7
@@ -28,6 +25,7 @@ matrix:
       dist: trusty
 
 before_install:
+    - BLAS=openblas
     - virtualenv --python=python venv
     - source venv/bin/activate
     - python --version # just to check
