@@ -1,31 +1,64 @@
 # vim ft=yaml
 sudo: false  # To use travis container infrastructure
 language: python
-
-python:
-    - 2.7
-    - 3.4
-    - 3.5
-
 env:
-    - CORE=
-    - CORE=prescott
-    - CORE=dunnington
-    - CORE=penryn
-    - CORE=core2
-    - CORE=nehalem
-    - CORE=sandybridge
+    global:
+        - BLAS=openblas
 
 matrix:
   include:
-    # Run a narrow unicode build on trusty
+    # Run a narrow and wide unicode build on trusty
     - python: 2.7
       dist: trusty
-    - python: 3.4
+    - python: 3.5
       dist: trusty
+    - python: 2.7
+      env:
+         - CORE=
+    - python: 2.7
+      env:
+         - CORE=prescott
+    - python: 2.7
+      env:
+         - CORE=dunnington
+    - python: 2.7
+      env:
+         - CORE=penryn
+    - python: 2.7
+      env:
+         - CORE=core2
+    - python: 2.7
+      env:
+         - CORE=nehalem
+    - python: 2.7
+      env:
+         - CORE=sandybridge
+    - python: 3.4
+      env:
+         - CORE=
+    - python: 3.5
+      env:
+         - CORE=
+    - python: 3.5
+      env:
+         - CORE=prescott
+    - python: 3.5
+      env:
+         - CORE=dunnington
+    - python: 3.5
+      env:
+         - CORE=penryn
+    - python: 3.5
+      env:
+         - CORE=core2
+    - python: 3.5
+      env:
+         - CORE=nehalem
+    - python: 3.5
+      env:
+         - CORE=sandybridge
 
 before_install:
-    - BLAS=openblas
     - virtualenv --python=python venv
     - source venv/bin/activate
     - python --version # just to check
