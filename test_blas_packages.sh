@@ -9,9 +9,9 @@ nosetests sklearn
 nosetests numexpr
 # Exclude failing datetime conversion tests
 # https://github.com/pydata/pandas/issues/12729
-nosetests --exe -A "not slow and not network and not disabled"
-  -e test_parsers -e TestDatetimeParsingWrappers
-  -e test_range_slice_seconds -e test_range_slice_day
+nosetests --exe -A "not slow and not network and not disabled" \
+  -e test_parsers -e TestDatetimeParsingWrappers \
+  -e test_range_slice_seconds -e test_range_slice_day \
   pandas
 # Statsmodels latest release breaks with latest pandas; use recent trunk
 # commit
