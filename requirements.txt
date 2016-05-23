@@ -4,7 +4,4 @@ scipy
 numexpr
 scikit-learn
 pandas
-# Statsmodels latest release breaks with latest pandas; use recent trunk
-# commit
-cython
-https://github.com/statsmodels/statsmodels/archive/c89da5cb7c49c7bdd8699df6e7073ace43bd5250.zip
+statsmodels
