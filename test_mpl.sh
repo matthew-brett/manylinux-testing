@@ -8,7 +8,7 @@ cp -r lib/matplotlib/tests/baseline_images $MPL_INSTALL_DIR/tests
 cd ..
 echo "Matplotlib importing from:"
 python -c 'import os, matplotlib; print(os.path.dirname(matplotlib.__file__))'
-echo "Testing tkagg basic plot"
-python -c 'import matplotlib; matplotlib.use("tkagg"); import matplotlib.pyplot as plt; plt.plot(range(10))'
+echo "Testing tkagg import"
+python -c 'import matplotlib; matplotlib.use("tkagg"); import matplotlib.pyplot as plt'
 echo "MPL tests:"
 python mpl-source/tests.py
