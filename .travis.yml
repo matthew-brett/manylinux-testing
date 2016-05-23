@@ -3,10 +3,34 @@ sudo: false  # To use travis container infrastructure
 language: python
 env:
     global:
-        - BLAS=openblas
+        - REQUIREMENTS=openblas-requirements.txt
+        - SCRIPT=test_blas_packages.sh
+        - MPL_VERSION=1.5.1
 
 matrix:
   include:
+    - python: 2.7
+      env:
+        - SCRIPT=test_mpl.sh
+        - REQUIREMENTS=mpl-requirements.txt
+    - python: 2.7
+      dist: trusty
+      env:
+        - SCRIPT=test_mpl.sh
+        - REQUIREMENTS=mpl-requirements.txt
+    - python: 3.5
+      dist: trusty
+      env:
+        - SCRIPT=test_mpl.sh
+        - REQUIREMENTS=mpl-requirements.txt
+    - python: 3.4
+      env:
+        - SCRIPT=test_mpl.sh
+        - REQUIREMENTS=mpl-requirements.txt
+    - python: 3.5
+      env:
+        - SCRIPT=test_mpl.sh
+        - REQUIREMENTS=mpl-requirements.txt
     # Run a narrow and wide unicode build on trusty
     - python: 2.7
       dist: trusty
@@ -66,28 +90,11 @@ before_install:
     - pip install -U wheel
 
 install:
-    - pip install --timeout=60 -r $BLAS-requirements.txt
-    # Statsmodels latest release breaks with latest pandas; use recent trunk
-    # commit
-    - pip install cython
-    - pip install https://github.com/statsmodels/statsmodels/archive/c89da5cb7c49c7bdd8699df6e7073ace43bd5250.zip
+    - pip install --timeout=60 -r $REQUIREMENTS
 
 script:
-    - export OPENBLAS_VERBOSE=2
-    - if [ -n "$CORE" ]; then export OPENBLAS_CORETYPE=$CORE; fi
     - pip install nose
     # Change into an innocuous directory and find tests from installation
     - mkdir for_testing
     - cd for_testing
-    - python -c 'import numpy; numpy.test("full")'
-    - python -c 'import scipy; scipy.test("full")'
-    - nosetests sklearn
-    - nosetests numexpr
-    # Exclude failing datetime conversion tests
-    # https://github.com/pydata/pandas/issues/12729
-    - nosetests --exe -A "not slow and not network and not disabled"
-      -e test_parsers -e TestDatetimeParsingWrappers
-      -e test_range_slice_seconds -e test_range_slice_day
-      pandas
-    # Exclude extremely slow statsmodels tests
-    - nosetests -e test_vcomp_2 -e test_sarimax --verbosity=3 statsmodels
+    - source ../$SCRIPT
