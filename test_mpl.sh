@@ -11,4 +11,9 @@ python -c 'import os, matplotlib; print(os.path.dirname(matplotlib.__file__))'
 echo "Testing tkagg import"
 python -c 'import matplotlib; matplotlib.use("tkagg"); import matplotlib.pyplot as plt'
 echo "MPL tests:"
+# Install numpy that tests are expecting. Subtle image differences for
+# numpy==1.11.0.
+pip install numpy==1.10.4
+# Install other test dependencies
+pip install mock sphinx
 python mpl-source/tests.py
