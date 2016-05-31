@@ -5,7 +5,9 @@ env:
     global:
         - REQUIREMENTS=openblas-requirements.txt
         - SCRIPT=test_blas_packages.sh
-        - MPL_VERSION=1.5.1
+        - MPL_VERSION=2.0.0b1
+        # Comment out to disable pre-release versions
+        - PRE="--pre"
 
 matrix:
   include:
@@ -90,7 +92,7 @@ before_install:
     - pip install -U wheel
 
 install:
-    - pip install --timeout=60 -r $REQUIREMENTS
+    - pip install --timeout=60 $PRE -r $REQUIREMENTS
 
 script:
     - pip install nose
