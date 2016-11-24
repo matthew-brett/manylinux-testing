@@ -3,7 +3,7 @@ sudo: false  # To use travis container infrastructure
 language: python
 env:
     global:
-        - REQUIREMENTS=openblas-requirements.txt
+        - REQUIREMENTS=requirements.txt
         - SCRIPT=test_blas_packages.sh
         - MPL_VERSION=1.5.3
         # Comment out to disable pre-release versions

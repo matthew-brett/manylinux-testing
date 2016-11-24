@@ -1,4 +1,3 @@
---no-index
 numpy
 scipy
 numexpr
