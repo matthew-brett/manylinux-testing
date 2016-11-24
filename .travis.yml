@@ -5,9 +5,9 @@ env:
     global:
         - REQUIREMENTS=openblas-requirements.txt
         - SCRIPT=test_blas_packages.sh
-        - MPL_VERSION=2.0.0b1
+        - MPL_VERSION=1.5.3
         # Comment out to disable pre-release versions
-        - PRE="--pre"
+        # - PRE="--pre"
 
 matrix:
   include:
